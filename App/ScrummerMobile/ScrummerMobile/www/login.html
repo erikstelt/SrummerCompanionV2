@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: 'unsafe-inline'; connect-src http://scrummer.space;">
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <!-- Lib -->
+    <link rel="stylesheet" href="css/lib/tonicons.css">
+    <link rel="stylesheet" href="css/lib/canonical.min.css"/>
+
+    <!-- Own -->
+    <link rel="stylesheet" href="css/vars.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/notification.css" />
+
+    <title>Scrummers</title>
+</head>
+<body>
+
+<section class="notification"></section>
+
+<h1>
+    <img src="img/scrummer.svg" />
+    Scrummer Mobile
+</h1>
+
+<button type="button" class="login-button">
+    <i class="ton-li-on-off"></i>
+    Log in
+</button>
+
+
+<!-- Cordova -->
+<script src="cordova.js"></script>
+<script src="scripts/platformOverrides.js"></script>
+
+<!-- Own -->
+<script src="scripts/notification.js"></script>
+<script src="scripts/api.js"></script>
+<script src="scripts/login.js"></script>
+
+</body>
+</html>

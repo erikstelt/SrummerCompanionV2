@@ -1,0 +1,172 @@
+.cards {
+    padding: var(--section-spacing);
+}
+
+.card {
+    margin-bottom: var(--section-spacing);
+}
+
+/* Styling for the remaining time / deadline text*/
+.card .faraway {
+}
+
+.card .almost {
+    color: #FFB340;
+}
+
+.card .soon {
+    color: #CC3300;
+}
+
+.card::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.card span {
+    line-height: 30px;
+    height: 30px;
+    display: block;
+    float: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 1px solid var(--card-border-color);
+}
+
+.card .title,
+.card .owner {
+    padding: 0 5px;
+    width: 70%;
+}
+
+.card .deadline,
+.card .tag {
+    border-left-width: 0;
+    text-align: center;
+    width: 30%;
+}
+
+.card > p {
+    border: solid var(--card-border-color);
+    border-width: 0 1px;
+    margin: 0;
+    padding: 5px;
+    min-height: 40px;
+    clear: both;
+}
+
+/**
+ * To do: change status colors
+ */
+.card .status {
+    background-color: #FFE5BF;
+    border: solid var(--card-border-color);
+    border-width: 1px 1px 0 1px;
+    height: 31px;
+}
+
+.card .status .statustext {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    border: solid var(--card-border-color);
+    border-width: 0 1px 0 0;
+    padding: 0 5px;
+}
+
+.card .status .deny,
+.card .status .accept {
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card .denied {
+    background-color: #F2CCBF;
+}
+
+.card .denied .statustext {
+    color: red;
+}
+
+.card .denied .deny i {
+    color: red;
+}
+
+.card .accepted {
+    background-color: #BFF2E5;
+}
+
+.card .accepted .statustext {
+    color: green;
+}
+
+.card .accepted .accept i {
+    color: green;
+}
+
+.card .status > span {
+    line-height: 30px;
+    height: 30px;
+    color: white;
+    text-align: center;
+    width: 50%;
+    font-size: var(--font-normal);
+    border: none;
+}
+
+.card .owner,
+.card .tag {
+}
+
+.card .owner {
+    border-radius: 0 0 0 15px;
+}
+
+.card .owner img {
+    display: block;
+    float: left;
+    padding: 2px 0;
+    margin-right: 5px;
+    height: 100%;
+}
+
+.card .owner i {
+    font-size: 26px;
+}
+
+.card .tag {
+    border-radius: 0 0 15px 0;
+}
+
+.card .tag i {
+    color: white;
+}
+
+.card .description {
+    background-color: #F0DBFF;
+}
+
+.card .documentation {
+    background-color: var(--tag-documentation);
+}
+
+.card .design {
+    background-color: var(--tag-design);
+}
+
+.card .research {
+    background-color: var(--tag-research);
+}
+
+.card .production {
+    background-color: var(--tag-production);
+}
+
+.card .interaction {
+    background-color: var(--tag-interaction);
+}
