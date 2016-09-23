@@ -1,0 +1,81 @@
+body {
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+    font-family: 'Roboto', 'San Francisco', 'Helvetica Neue', 'Segoe UI';
+    color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: lighter;
+}
+
+/**
+ * Override canonical and tonicons
+ */
+i,
+i::before {
+    vertical-align: initial;
+}
+
+button {
+    text-align: center;
+    background: none;
+    border: none;
+    height: 40px;
+    line-height: 40px;
+    color: var(--highlight-text-color);
+}
+
+/**
+ * Slider
+ */
+.slider {
+    position: relative;
+    flex: 1;
+}
+
+.slider > .flickity-viewport {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/**
+ * Slider Nav
+ */
+.slider-nav {
+    position: relative;
+    display: flex;
+    flex: none;
+}
+
+.slider-nav input[type="radio"] {
+    display: none;
+}
+
+.slider-nav label {
+    flex: 1;
+    background: var(--background-color);
+    transition: background-color .1s ease-in-out;
+    color: var(--highlight-text-color);
+    text-align: center;
+}
+
+.slider-nav input[type="radio"]:checked + label {
+    background: var(--primary-color);
+}
+
+.slider-nav label i {
+    line-height: 30px;
+    vertical-align: initial;
+}
+
+/** 
+* Main nav
+*/
+.main-nav label {
+    margin-left: auto;
+    margin-right: auto;
+}
+

@@ -1,0 +1,183 @@
+﻿/*
+ * Trophies section
+ * namespace: .trophies
+ */
+
+.trophies .list {
+    padding: 0 var(--section-spacing) var(--section-spacing) var(--section-spacing);
+    position: relative;
+    height: 100%;
+    overflow: auto;
+}
+
+.trophies .power {
+    margin-bottom: var(--section-spacing);
+}
+
+.trophies h3 {
+    float: left;
+    margin: 0 0 10px 0;
+    text-transform: capitalize;
+}
+
+.trophies .power.research h3,
+.trophies .power.research i {
+    color: var(--tag-research);
+}
+
+.trophies .power.design h3,
+.trophies .power.design i {
+    color: var(--tag-design);
+}
+
+.trophies .power.interaction h3,
+.trophies .power.interaction i {
+    color: var(--tag-interaction);
+}
+
+.trophies .power.production h3,
+.trophies .power.production i {
+    color: var(--tag-production);
+}
+
+.trophies .power.documentation h3,
+.trophies .power.documentation i {
+    color: var(--tag-documentation);
+}
+
+.trophies .progress {
+    position: relative;
+    float: right;
+    height: 18px;
+    margin-top: 4px;
+}
+
+.trophies .progress span {
+    font-size: var(--font-small);
+    line-height: 18px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 5px;
+    height: 20px;
+    color: var(--highlight-text-color);
+    text-shadow: rgb(3, 3, 3) 1px 1px 1px;
+}
+
+.trophies progress {
+    width: 130px;
+    height: 18px;
+    border: 1px solid var(--card-border-color);
+    -webkit-appearance: none;
+}
+
+.trophies progress::-webkit-progress-bar {
+    background: #fff;
+}
+
+.trophies .research progress::-webkit-progress-value {
+    background-color: var(--tag-research);
+}
+
+.trophies .design progress::-webkit-progress-value {
+    background-color: var(--tag-design);
+}
+
+.trophies .interaction progress::-webkit-progress-value {
+    background-color: var(--tag-interaction);
+}
+
+.trophies .production progress::-webkit-progress-value {
+    background-color: var(--tag-production);
+}
+
+.trophies .documentation progress::-webkit-progress-value {
+    background-color: var(--tag-documentation);
+}
+
+.trophies .badges {
+    display: flex;
+    position: relative;
+    clear: both;
+    justify-content: space-between;
+}
+
+.trophies .badge {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    text-align: center;
+    border: 1px solid var(--card-border-color);
+}
+
+.trophies .badge i {
+    font-size: 42px;
+    margin: auto;
+    line-height: 70px;
+    display: block;
+    width: 100%;
+}
+
+.trophies .badge > span {
+    font-size: var(--font-small);
+    line-height: 19px;
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 19px;
+    color: var(--highlight-text-color);
+    border-top: 1px solid var(--card-border-color);
+}
+
+.trophies .badge .timeout {
+    position: absolute;
+    top: 0;
+    bottom: 20px;
+    width: 100%;
+    background-color: white;
+    color: #cc3300
+}
+
+.trophies .badge .timeout i {
+    line-height: 50px;
+    color: #cc3300;
+}
+
+.trophies .badge .timeout > span {
+    font-size: var(--font-small);
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    position: absolute;
+    bottom: 0;
+    display: block;
+}
+
+.trophies .achievements .badge {
+    margin: 0 10px;
+}
+
+.trophies .achievements .badge > span {
+    background: var(--tag-achievement);
+}
+
+.trophies .research .badge > span {
+    background-color: var(--tag-research);
+}
+
+.trophies .design .badge > span {
+    background-color: var(--tag-design);
+}
+
+.trophies .interaction .badge > span {
+    background-color: var(--tag-interaction);
+}
+
+.trophies .production .badge > span {
+    background-color: var(--tag-production);
+}
+
+.trophies .documentation .badge > span {
+    background-color: var(--tag-documentation);
+}

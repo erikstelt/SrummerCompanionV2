@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: 'unsafe-inline' http://scrummer.space/">
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <!-- Lib -->
+    <link rel="stylesheet" href="css/lib/canonical.min.css"/>
+    <link rel="stylesheet" href="css/lib/flickity.min.css"/>
+    <link rel="stylesheet" href="css/lib/tonicons.css"/>
+
+    <!-- Own -->
+    <link rel="stylesheet" href="css/vars.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+    <link rel="stylesheet" href="css/notification.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/widget.css"/>
+    <link rel="stylesheet" href="css/cards.css"/>
+    <link rel="stylesheet" href="css/trophies.css"/>
+    <link rel="stylesheet" href="css/profile.css"/>
+    <link rel="stylesheet" href="css/modal.css"/>
+
+    <title>Scrummer</title>
+</head>
+<body>
+
+<section class="notification"></section>
+
+<aside id="widget-template" class="widget" data-template="widget">
+    <input id="widget-toggle" type="checkbox" {{{checked}}}/>
+
+    <img src="{{avatar}}"/>
+
+    <div class="left">
+        <h1>{{ name }}</h1>
+        <h2>Class: {{ class }}</h2>
+        <div class="points">
+            <div class="research">{{ power1 }}</div>
+            <div class="design">{{ power2 }}</div>
+            <div class="interaction">{{ power3 }}</div>
+            <div class="production">{{ power4 }}</div>
+            <div class="documentation">{{ power5 }}</div>
+        </div>
+    </div>
+
+    <div class="right">
+        <label for="widget-toggle">
+            <i class="ton-li-plus"></i>
+            <i class="ton-li-minus"></i>
+        </label>
+
+        <span>Lvl: {{ level }}</span>
+    </div>
+</aside>
+
+<main class="main slider">
+    <!-- The cards section of the page -->
+    <section class="cards" data-template="cards" id="cards-template">
+        {{^cards}}
+        <h2>You have no cards that need verification.</h2>
+        {{/cards}}
+        {{#cards}}
+        <div class="card" data-card-id="{{id}}">
+            <span class="title">{{title}}</span>
+            <span class="deadline {{deadline.class}}">{{deadline.value}}</span>
+            <p class="description">
+                {{description}}
+            </p>
+
+            <div class="status {{statusclass}}">
+                <span class="statustext">
+                    {{statustext}}
+                </span>
+                <span class="deny" data-card-id="{{id}}">
+                    <i class="ton-li-cross"></i>
+                </span>
+                <span class="accept" data-card-id="{{id}}">
+                    <i class="ton-so-check"></i>
+                </span>
+            </div>
+            <span class="owner">
+                <img src="img/scrummer.svg"/>
+                {{user.first_name}} {{user.last_name}}
+            </span>
+            <span class="tag {{power}}">
+                <i class="{{icon}}"></i>
+            </span>
+        </div>
+        {{/cards}}
+    </section>
+
+    <!-- The trophies section of the page -->
+    <section class="trophies">
+        <section id="modal-template" class="modal rendered" data-template="modal">
+            <div class="{{power}}">
+                <h1>{{name}}</h1>
+
+                <section>
+                    <p class="info">
+                        {{desc}}
+                    </p>
+                    <p class="cost">
+                        {{cost}}
+                    </p>
+                    {{#has_teams}}
+                    <select>
+                        <option>Selecteer team&hellip;</option>
+                        {{#teams}}
+                        <option value="{{id}}">{{name}}</option>
+                        {{/teams}}
+                    </select>
+                    {{/has_teams}}
+                </section>
+
+                <footer>
+                    <button type="button" class="cancel">
+                        Cancel
+                    </button>
+
+                    {{#can_buy}}
+                    <button type="button" class="buy" data-perk-id="{{id}}">
+                        Buy
+                    </button>
+                    {{/can_buy}}
+                    {{^can_buy}}
+                    <span class="unavailable">
+                        Not available
+                    </span>
+                    {{/can_buy}}
+                </footer>
+            </div>
+        </section>
+
+        <section id="trophies-template" class="list" data-template="trophies">
+            <h2>Achievements</h2>
+
+            <div class="achievements">
+                {{#achievements}}
+                <div class="badge" data-perk-id="{{id}}">
+                    <i class="ton-li-{{icon}}"></i>
+                    <span>{{name}}</span>
+                </div>
+                {{/achievements}}
+            </div>
+
+            <h2>Powers</h2>
+            {{#powers}}
+            <div class="power {{name}}">
+                <h3>{{name}}</h3>
+
+                <div class="progress">
+                    <span>{{points}}</span>
+                    <progress value="{{points}}" max="1000"></progress>
+                </div>
+
+                <div class="badges">
+                    {{#perks}}
+                    <div class="badge" data-perk-id="{{id}}">
+                        {{#cooldown.text}}
+                        <div class="timeout">
+                            <i class="ton-li-clock-2"></i>
+                            <span>{{.}}</span>
+                        </div>
+                        {{/cooldown.text}}
+                        <i class="ton-li-{{icon}}"></i>
+                        <span>{{name}}</span>
+                    </div>
+                    {{/perks}}
+                </div>
+            </div>
+            {{/powers}}
+        </section>
+    </section>
+
+    <!-- The profile section of the page -->
+    <section id="profile-template" class="profile" data-template="profile">
+        <h2>Experience</h2>
+        <div class="experience">
+            <span>{{exp}} / {{maxExp}}</span>
+            <progress value="{{exp}}" max="{{maxExp}}"></progress>
+        </div>
+
+        <h2>Skills</h2>
+
+        <div class="skill">
+            <span>{{mastery.percent}}</span>
+            <div class="progress">
+                <span class="progress-text">Mastery</span>
+                <progress value="{{mastery.exp}}" max="5000"></progress>
+            </div>
+        </div>
+
+        <div class="skill">
+            <span>{{teamwork.percent}}</span>
+            <div class="progress">
+                <span>Teamwork</span>
+                <progress value="{{teamwork.exp}}" max="10"></progress>
+            </div>
+        </div>
+
+        <div class="skill">
+            <span>{{responsibility.percent}}</span>
+            <div class="progress">
+                <span>Responsibility</span>
+                <progress value="{{responsibility.exp}}" max="100"></progress>
+            </div>
+        </div>
+
+        <h2>Powers</h2>
+        <div class="power research">
+            <i class="ton-li-chart-7"></i>
+            <div class="progress">
+                <span>{{power1}}</span>
+                <progress value="{{power1}}" max="1000"></progress>
+            </div>
+        </div>
+        <div class="power design">
+            <i class="ton-li-eye"></i>
+            <div class="progress">
+                <span>{{power2}}</span>
+                <progress value="{{power2}}" max="1000"></progress>
+            </div>
+        </div>
+        <div class="power interaction">
+            <i class="ton-li-speech-buble-3"></i>
+            <div class="progress">
+                <span>{{power3}}</span>
+                <progress value="{{power3}}" max="1000"></progress>
+            </div>
+        </div>
+        <div class="power production">
+            <i class="ton-li-gear-1"></i>
+            <div class="progress">
+                <span>{{power4}}</span>
+                <progress value="{{power4}}" max="1000"></progress>
+            </div>
+        </div>
+        <div class="power documentation">
+            <i class="ton-li-pen"></i>
+            <div class="progress">
+                <span>{{power5}}</span>
+                <progress value="{{power5}}" max="1000"></progress>
+            </div>
+        </div>
+
+        <div class="extra">
+            <p>
+                Created with &#9829; by Davy Visser, Erik Steltenpool and
+                <a href="http://tomhooijenga.nl">Tom Hooijenga</a>.
+            </p>
+            <button type="button" class="logout">
+                <i class="ton-li-on-off"></i>
+                Log out
+            </button>
+        </div>
+    </section>
+</main>
+
+<nav class="main-nav slider-nav">
+    <input id="profile" type="radio" data-slide-index="0" name="nav"/>
+    <label for="profile"><i class="ton-li-gong"></i></label>
+
+    <input id="cards" type="radio" data-slide-index="1" name="nav" checked/>
+    <label for="cards"><i class="ton-li-star-1"></i></label>
+
+    <input id="perks" type="radio" data-slide-index="2" name="nav"/>
+    <label for="perks"><i class="ton-li-id"></i></label>
+</nav>
+
+<!-- Cordova -->
+<script src="cordova.js"></script>
+<script src="scripts/platformOverrides.js"></script>
+
+<!-- Lib -->
+<script src="scripts/lib/flickity.pkgd.min.js"></script>
+<script src="scripts/lib/mustache.min.js"></script>
+<script src="scripts/lib/lodash.min.js"></script>
+<script src="scripts/lib/md5.js"></script>
+
+<!-- Own -->
+<script src="scripts/notification.js"></script>
+<script src="scripts/api.js"></script>
+<script src="scripts/index.js"></script>
+<script src="scripts/template.js"></script>
+<script src="scripts/main.js"></script>
+<script src="scripts/cards.js"></script>
+<script src="scripts/widget.js"></script>
+<script src="scripts/trophies.js"></script>
+<script src="scripts/profile.js"></script>
+
+</body>
+</html>

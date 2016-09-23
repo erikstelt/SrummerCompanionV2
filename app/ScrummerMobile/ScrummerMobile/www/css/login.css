@@ -1,0 +1,14 @@
+﻿body {
+    text-align: center;
+    justify-content: center;
+}
+
+h1 img {
+    width: 100px;
+    height: auto;
+}
+
+button {
+    margin: var(--section-spacing);
+    background: var(--primary-color);
+}

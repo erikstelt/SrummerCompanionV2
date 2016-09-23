@@ -1,0 +1,13 @@
+.notification {
+    background: linear-gradient(#df3800, #b82e00);
+    color: var(--highlight-text-color);
+    line-height: 30px;
+    height: 0;
+    transition: .2s ease-in-out;
+    transition-property: height;
+    text-align: center;
+}
+
+.notification.show {
+    height: 30px;
+}

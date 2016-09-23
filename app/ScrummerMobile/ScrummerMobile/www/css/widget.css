@@ -1,0 +1,126 @@
+﻿.widget {
+    padding: 10px;
+    background-image: linear-gradient(#555555, var(--background-color));
+    color: var(--alternate-text-color);
+    display: flex;
+}
+
+.widget input {
+    display: none;
+}
+
+.widget label i {
+    display: none;
+}
+
+.widget input:not(:checked) ~ .right > label > .ton-li-minus,
+.widget input:checked ~ .right > label > .ton-li-plus {
+    display: block;
+}
+
+.widget > img {
+    width: 90px;
+    height: 90px;
+    margin-right: 10px;
+    border-radius: 100%;
+    transition: .2s ease-in-out;
+    transition-property: width, height;
+    flex: none;
+    background: #f7f7f7;
+}
+
+.widget input:checked ~ img {
+    width: 40px;
+    height: 40px;
+}
+
+.widget > .left {
+    flex: 1;
+}
+
+.widget h1 {
+    margin: 0;
+    line-height: 30px;
+    font-size: var(--font-large);
+    transition: line-height .2s ease-in-out;
+}
+
+.widget input:checked ~ .left h1 {
+    line-height: 40px;
+}
+
+.widget h2 {
+    margin: 0;
+    line-height: 25px;
+    font-size: var(--font-normal);
+}
+
+.widget input:checked ~ .left h2,
+.widget input:checked ~ .left .points {
+    display: none;
+}
+
+.widget .points {
+    height: 20px;
+    font-size: 14px;
+    line-height: 18px;
+    display: flex;
+    margin: 10px 0 0 0;
+}
+
+.widget .points > div {
+    border: solid var(--alternate-text-color);
+    border-width: 1px 0 1px 1px;
+    flex: 1;
+    text-align: center;
+}
+
+.widget .points > div:last-child {
+    border-right-width: 1px;
+}
+
+.widget .right {
+    flex: none;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.widget .right label {
+    margin-left: auto;
+    overflow: auto;
+}
+
+.widget .right span {
+    line-height: 12px;
+    margin: auto 0 10px 0;
+    font-size: var(--font-normal);
+    text-align: left;
+}
+
+.widget input:checked ~ .right span {
+    display: none;
+}
+
+/**
+ * Tags
+ */
+.widget .documentation {
+    background-color: var(--tag-documentation);
+}
+
+.widget .interaction {
+    background-color: var(--tag-interaction);
+}
+
+.widget .production {
+    background-color: var(--tag-production);
+}
+
+.widget .design {
+    background-color: var(--tag-design);
+}
+
+.widget .research {
+    background-color: var(--tag-research);
+}
