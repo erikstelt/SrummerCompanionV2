@@ -5,13 +5,25 @@
 
 .profile {
     padding: 0 var(--section-spacing) var(--section-spacing) var(--section-spacing);
+    margin-top: -10px;
+    overflow: none;
 }
 
 .profile progress {
     -webkit-appearance: none;
-    height: 22px;
+    height: 20px;
+    color: black;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
     border: 1px solid var(--card-border-color);
     width: 100%;
+}
+
+.profile h2 {
+    margin-bottom: 4px;
+}
+
+.profile i {
+    margin-top: 2px;
 }
 
 .profile progress::-webkit-progress-bar {
@@ -24,15 +36,19 @@
     position: relative;
 }
 
+.profile .skill {
+    color: #cc0f59;
+}
+
 .profile .skill,
 .profile .power {
-    height: 22px;
-    line-height: 22px;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
     display: flex;
     margin-bottom: 8px;
 }
 
-.profile .experience progress::-webkit-progress-value,
 .profile .skill progress::-webkit-progress-value {
     background-color: #cc0f59;
 }
@@ -41,12 +57,14 @@
 .profile .progress span {
     display: block;
     position: absolute;
-    color: var(--highlight-text-color);
+    color: black;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
     text-align: center;
     width: 100%;
-    line-height: 22px;
-    text-shadow: rgb(3, 3, 3) 1px 1px 1px;
-    top: 0;
+    line-height: 20px;
+    vertical-align: middle;
+    top: 2px;
+    margin-left: -2px;
 }
 
 .profile .skill .progress span {
@@ -113,6 +131,7 @@
 .profile .extra {
     margin-top: var(--section-spacing);
     border-top: 1px dashed var(--primary-color);
+    margin-bottom: -30px;
 }
 
 .profile .extra p,

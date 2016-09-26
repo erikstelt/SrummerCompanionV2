@@ -33,28 +33,34 @@
 <aside id="widget-template" class="widget" data-template="widget">
     <input id="widget-toggle" type="checkbox" {{{checked}}}/>
 
-    <img src="{{avatar}}"/>
+        <img src="{{avatar}}" style="margin-top:10px;" />
 
-    <div class="left">
-        <h1>{{ name }}</h1>
-        <h2>Class: {{ class }}</h2>
-        <div class="points">
-            <div class="research">{{ power1 }}</div>
-            <div class="design">{{ power2 }}</div>
-            <div class="interaction">{{ power3 }}</div>
-            <div class="production">{{ power4 }}</div>
-            <div class="documentation">{{ power5 }}</div>
+        <div class="left">
+            <h1>{{ name }}</h1>
+            <h2>Class: {{ class }}</h2>
+            <div class="points">
+                <div class="research">{{ power1 }}</div>
+                <div class="design">{{ power2 }}</div>
+                <div class="interaction">{{ power3 }}</div>
+                <div class="production">{{ power4 }}</div>
+                <div class="documentation">{{ power5 }}</div>
+            </div>
+            <div class="widget-experience">
+                <div class="exp-bar">
+                    <span>2000 / 5000</span>
+                    <progress class="progress-experience" value="2000" max="5000"></progress>
+                </div>
+                <div class="widget-level">lvl <span class="lvl">{{level}}</span></div>
+            </div>
         </div>
-    </div>
 
-    <div class="right">
-        <label for="widget-toggle">
-            <i class="ton-li-plus"></i>
-            <i class="ton-li-minus"></i>
-        </label>
-
-        <span>Lvl: {{ level }}</span>
-    </div>
+        <div class="right">
+            <label for="widget-toggle">
+                <i class="ton-li-plus"></i>
+                <i class="ton-li-minus"></i>
+            </label>
+        </div>
+    
 </aside>
 
 <main class="main slider">
@@ -178,14 +184,14 @@
 
     <!-- The profile section of the page -->
     <section id="profile-template" class="profile" data-template="profile">
+        <!--
         <h2>Experience</h2>
         <div class="experience">
             <span>{{exp}} / {{maxExp}}</span>
             <progress value="{{exp}}" max="{{maxExp}}"></progress>
         </div>
-
+            -->
         <h2>Skills</h2>
-
         <div class="skill">
             <span>{{mastery.percent}}</span>
             <div class="progress">
