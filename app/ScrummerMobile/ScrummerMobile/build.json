@@ -1,10 +1,17 @@
 {
      "android": {
-         "release": {
-             "keystore": "scrummer-companion-key.keystore",
-             "storePassword": "yrfpsv4yivenh1m",
-             "alias": "tom",
-             "password" : "yrfpsv4yivenh1m",
+          "debug": {
+            "keystore": "",
+            "storePassword": "",
+            "alias": "",
+            "password": "",
+            "keystoreType": ""
+          },
+            "release": {
+             "keystore": "",
+             "storePassword": "",
+             "alias": "",
+             "password" : "",
              "keystoreType": ""
          }
      }
