@@ -18,6 +18,10 @@
     margin-bottom: 0px;
 }
 
+.trophies .list h2 {
+    margin-bottom: 5px;
+}
+
 .trophies .power {
     margin-bottom: var(--section-spacing);
 }
