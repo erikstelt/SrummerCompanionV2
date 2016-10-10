@@ -3,11 +3,19 @@
  * namespace: .trophies
  */
 
+.trophies {
+    margin-top: -10px;
+}
+
 .trophies .list {
     padding: 0 var(--section-spacing) var(--section-spacing) var(--section-spacing);
     position: relative;
     height: 100%;
     overflow: auto;
+}
+
+.trophies .list > :last-child {
+    margin-bottom: 0px;
 }
 
 .trophies .power {
@@ -48,20 +56,21 @@
 .trophies .progress {
     position: relative;
     float: right;
-    height: 18px;
+    height: 20px;
     margin-top: 4px;
+    color: black;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    border: 1px solid var(--card-border-color);
 }
 
 .trophies .progress span {
     font-size: var(--font-small);
-    line-height: 18px;
+    line-height: 20px;
     position: absolute;
-    top: 0;
+    top: 2px;
     bottom: 0;
     left: 5px;
     height: 20px;
-    color: var(--highlight-text-color);
-    text-shadow: rgb(3, 3, 3) 1px 1px 1px;
 }
 
 .trophies progress {

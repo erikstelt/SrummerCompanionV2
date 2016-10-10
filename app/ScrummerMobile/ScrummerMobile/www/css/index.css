@@ -48,6 +48,8 @@ button {
     position: relative;
     display: flex;
     flex: none;
+    height: 30px;
+    margin-top: -10px;
 }
 
 .slider-nav input[type="radio"] {
@@ -56,6 +58,8 @@ button {
 
 .slider-nav label {
     flex: 1;
+    line-height: 33px;
+    vertical-align: initial;
     background: var(--background-color);
     transition: background-color .1s ease-in-out;
     color: var(--highlight-text-color);
@@ -67,7 +71,7 @@ button {
 }
 
 .slider-nav label i {
-    line-height: 30px;
+    line-height: 33px;
     vertical-align: initial;
 }
 
@@ -77,5 +81,7 @@ button {
 .main-nav label {
     margin-left: auto;
     margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 

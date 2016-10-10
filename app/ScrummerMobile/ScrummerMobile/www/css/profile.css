@@ -14,7 +14,7 @@
     height: 20px;
     color: black;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-    border: 1px solid var(--card-border-color);
+    border: 2px solid var(--card-border-color);
     width: 100%;
 }
 
@@ -30,10 +30,10 @@
     background: #fff;
 }
 
-.profile .experience,
 .profile .progress {
     flex: 1;
     position: relative;
+    font-size: 14px;
 }
 
 .profile .skill {
