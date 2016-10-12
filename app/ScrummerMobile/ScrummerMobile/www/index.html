@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport"
-          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=medium-dpi">
 
     <!-- Lib -->
     <link rel="stylesheet" href="css/lib/canonical.min.css"/>
@@ -33,10 +33,10 @@
 <aside id="widget-template" class="widget" data-template="widget">
     <input id="widget-toggle" type="checkbox" {{{checked}}}/>
 
-        <img src="{{avatar}}" style="margin-top:10px;" />
+        <img src="{{avatar}}" />
 
         <div class="left">
-            <h1>{{ name }}</h1>
+            <p><h1>{{ name }}</h1></p>
             <h2>Class: {{ class }}</h2>
             <div class="points">
                 <div class="research">{{ power1 }}</div>
