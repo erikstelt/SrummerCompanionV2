@@ -38,13 +38,17 @@
 .card .title,
 .card .owner {
     padding: 0 5px;
+    display:flex;
+    align-items: center;
     width: 70%;
 }
 
 .card .deadline,
 .card .tag {
     border-left-width: 0;
-    text-align: center;
+    display:flex;
+    justify-content: center;
+    align-items: center;
     width: 30%;
 }
 

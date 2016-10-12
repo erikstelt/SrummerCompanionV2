@@ -26,6 +26,12 @@
     margin-top: 2px;
 }
 
+.profile .title {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .profile progress::-webkit-progress-bar {
     background: #fff;
 }
