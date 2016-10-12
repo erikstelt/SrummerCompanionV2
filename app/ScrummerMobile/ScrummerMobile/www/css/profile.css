@@ -32,6 +32,9 @@
 
 .profile .progress {
     flex: 1;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
     position: relative;
     font-size: 14px;
 }
