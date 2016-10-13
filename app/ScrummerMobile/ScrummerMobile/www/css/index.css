@@ -92,3 +92,17 @@ button {
     margin-bottom: auto;
 }
 
+.main-nav .cards-notification {
+    width: 26px; 
+    height: 26px; 
+    position: absolute; 
+    margin-left:29%; 
+    margin-top: -2%; 
+    background-color: #6699ff;
+    border-radius: 3px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+

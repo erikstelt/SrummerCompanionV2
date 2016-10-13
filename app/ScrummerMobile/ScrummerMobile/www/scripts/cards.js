@@ -4,6 +4,9 @@
     var powerIcons = ['ton-li-chart-7', 'ton-li-eye', 'ton-li-speech-buble-3', 'ton-li-gear-1', 'ton-li-pen'],
         powerNames = ['research', 'design', 'interaction', 'production', 'documentation', 'achievement'];
 
+    // Counter for total cards
+    var totalCards;
+
     Template.data.cards = function () {
         // Get profile
         return API.getProfile()
@@ -36,6 +39,10 @@
                     return a.deadline.timestamp - b.deadline.timestamp;
                 });
 
+                // Set the total cards variable and edit the innerHTML of the notification popup
+                totalCards = cards.length;
+                document.getElementById("cards-notification").innerHTML = totalCards;
+
                 return {
                     cards: cards
                 };
@@ -43,6 +50,8 @@
     };
 
     Template.render('cards');
+
+    document.getElementsByClassName("cards-notification").innerHTML = totalCards;
 
     // Once the content is loaded we start the card events for verify / deny
     document.addEventListener('DOMContentLoaded', function () {
@@ -66,5 +75,6 @@
                 Notification.show(error);
             });
         });
+
     });
 })();
