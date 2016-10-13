@@ -10,6 +10,7 @@
     // Function for showing or hiding the notification counter if necessary
     function cardNotifications() {
         if (notificationCardCounter > 0) {
+            if (notificationCardCounter > 99) { notificationCardCounter = '99+' };
             document.getElementById("cards-notification").innerHTML = notificationCardCounter;
             document.getElementById("cards-notification").style.display = 'flex';
         } else { document.getElementById("cards-notification").style.display = 'none'; }
