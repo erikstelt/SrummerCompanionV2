@@ -95,12 +95,13 @@ button {
 .main-nav .cards-notification {
     width: 26px; 
     height: 26px; 
+    display: none;
     position: absolute; 
     margin-left:29%; 
     margin-top: -2%; 
-    background-color: #6699ff;
+    background-color: #ff9900;
     border-radius: 3px;
-    display:flex;
+    border: 1px solid var(--card-border-color);
     justify-content: center;
     align-items: center;
     color: white;

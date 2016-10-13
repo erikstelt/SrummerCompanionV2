@@ -5,7 +5,15 @@
         powerNames = ['research', 'design', 'interaction', 'production', 'documentation', 'achievement'];
 
     // Counter for total cards
-    var totalCards;
+    var notificationCardCounter = 0;
+
+    // Function for showing or hiding the notification counter if necessary
+    function cardNotifications() {
+        if (notificationCardCounter > 0) {
+            document.getElementById("cards-notification").innerHTML = notificationCardCounter;
+            document.getElementById("cards-notification").style.display = 'flex';
+        } else { document.getElementById("cards-notification").style.display = 'none'; }
+    }
 
     Template.data.cards = function () {
         // Get profile
@@ -28,6 +36,8 @@
                         card.statusclass = 'denied';
                         card.statustext = 'denied';
                     } else {
+                        // Count the cards which need verifications
+                        notificationCardCounter++;
                         card.statusclass = '';
                     }
                     card.description = card.description || 'No description given.';
@@ -39,9 +49,8 @@
                     return a.deadline.timestamp - b.deadline.timestamp;
                 });
 
-                // Set the total cards variable and edit the innerHTML of the notification popup
-                totalCards = cards.length;
-                document.getElementById("cards-notification").innerHTML = totalCards;
+                // Show or hide notifications popup if notificationCardCounter > 0
+                cardNotifications();
 
                 return {
                     cards: cards
@@ -51,17 +60,22 @@
 
     Template.render('cards');
 
-    document.getElementsByClassName("cards-notification").innerHTML = totalCards;
-
     // Once the content is loaded we start the card events for verify / deny
     document.addEventListener('DOMContentLoaded', function () {
         delegate(document.querySelector('.cards'), '.deny, .accept', function() {
             var cardId = this.dataset.cardId,
                 status = this.classList.contains('accept');
+            var removeNotification = false;
 
             // Alter card status
             // Change classes and text for correct display
             var newStatus = document.querySelector('.card[data-card-id="' + cardId + '"] .status');
+
+            // If the card is not yet verified (denied || accepted) remove it from the notification
+            if (!newStatus.classList.contains('accepted') && !newStatus.classList.contains('denied')) {
+                removeNotification = true;
+            }
+
             newStatus.classList.remove('accepted', 'denied');
             newStatus.classList.add(status ? 'accepted' : 'denied');
             newStatus.querySelector('.statustext').textContent = status ? 'accepted' : 'denied';
@@ -70,6 +84,10 @@
             API.verifyCard(cardId, status).then(function(response) {
                 if (!response.result) {
                     return Promise.reject('Card could not be changed');
+                } else {
+                    // Remove the notification if promise can be completed
+                    (removeNotification) ? notificationCardCounter += -1 : '';
+                    cardNotifications();
                 }
             }).catch(function(error) {
                 Notification.show(error);
