@@ -17,8 +17,6 @@
     }
 
     Template.data.cards = function () {
-        // Reset notification card counter
-        notificationCardCounter = 0;
         // Get profile
         return API.getProfile()
             .then(function (profile) {
