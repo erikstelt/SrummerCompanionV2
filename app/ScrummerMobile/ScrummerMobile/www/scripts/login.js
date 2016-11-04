@@ -9,9 +9,12 @@
     //  else
     //      show login screen
 
-    document.addEventListener('deviceready', function() {
+    document.addEventListener('deviceready', function () {
         var token = localStorage.getItem('token'),
             expires = localStorage.getItem('token_expires');
+
+        // Variables for user authentication
+        var email, password;
 
         if (token && expires) {
             // check age of token
@@ -23,12 +26,18 @@
         }
     
         document.querySelector('.login-button').addEventListener('click', function (e) {
+            console.log('test');
+            var email = document.getElementById('username');
+            var password = document.getElementById('password');
             login();
         });
 
-        function login() {
+        function login(email, password) {
+            console.log(email);
+            console.log(password);
             // Login and fetch the token
-            API.login().then(function (data) {
+            API.loginNew(email, password).then(function (data) {
+                console.log(data);
                 // Store the token and expiry date
                 localStorage.setItem('token', data.access_token);
                 localStorage.setItem('token_expires', new Date(Date.now() + parseInt(data['expires_in'], 10) * 1000).getTime());

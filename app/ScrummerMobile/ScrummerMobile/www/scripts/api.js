@@ -20,10 +20,10 @@
          * @type {Object<string, string>}
          */
         urls: {
-            base: 'http://scrummer.space/api/',
-            login: 'oauth2/authorize/',
+            base: 'http://api.dev.scrummer.space/',
+            //login: 'oauth2/authorize/',
+            login: 'auth/login',
             logout: 'oauth2/revoke_token/',
-            callback: 'oauth2/callback/',
             profile: 'account/me/',
             account: 'account/{email}/',
             badges: 'account/{email}/badges/',
@@ -87,6 +87,19 @@
                     login.close();
                 }, false);
             }.bind(this));
+        },
+        /**
+         * Login to the API and get a JWT returned
+         *
+         * @returns {Promise}
+         */
+        loginNew: function (email, password) {
+            var url = this.buidlURL(this.urls.newLogin, {
+                email: email,
+                password: password
+            });
+            console.log(url);
+            return this.get(url);
         },
         /**
          * End the user session
