@@ -1,8 +1,6 @@
 ﻿body {
     text-align: center;
     justify-content: center;
-	background: var(--primary-color);
-	color: #a5a5a5;
 }
 
 h1 img {
@@ -13,35 +11,4 @@ h1 img {
 button {
     margin: var(--section-spacing);
     background: var(--primary-color);
-	width: 80%;
-}
-
-input {
-	margin-bottom: 8px;
-	padding: 10px 0px 10px 5px;
-	width: 80%;
-}
-
-.inner-body {
-	border: 1px solid var(--primary-color);
-	border-radius: 0px 0px 15px 15px;
-	width: 95%;
-	height: 97%;
-	align-self: center;
-	background: white;
-}
-
-.lower-inner-body {
-	border-top: 1px solid var(--primary-color);
-	height: 100%;
-	margin-top: 10%;
-}
-
-.alt-login {
-	padding-top: 20px;
-	padding-bottom: 10px;
-}
-
-.external-buttons {
-	letter-spacing: 20px;
 }

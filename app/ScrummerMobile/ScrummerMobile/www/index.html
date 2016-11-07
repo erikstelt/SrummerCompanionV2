@@ -31,9 +31,9 @@
 <section class="notification"></section>
 
 <aside id="widget-template" class="widget" data-template="widget">
-    <input id="widget-toggle" type="checkbox" {{{checked}}}/>
+    <input id="widget-toggle" type="checkbox" {{{checked}}} onclick="SetNotifyPanelPosition();"/>
 
-        <img src="{{avatar}}" />
+        <span id="avatar" onclick="ShowHideNotifyPanel();"><img src="{{avatar}}"/></span>
 
         <div class="left">
             <p><h1>{{ name }}</h1></p>
@@ -62,8 +62,17 @@
         </div>
     
 </aside>
+<div id="notify-area">
+    <div id="notification-wrapper">
+        <div class="notification">
+            notificatie
+        </div>
+    </div>
+    <div id="notify-bottom-bar" onclick="ShowHideNotifyPanel();">Sluiten</div>
+</div>
 
 <main class="main slider">
+
     <!-- The cards section of the page -->
     <section class="cards" data-template="cards" id="cards-template">
         {{^cards}}
@@ -265,7 +274,6 @@
         </div>
     </section>
 </main>
-
 <nav class="main-nav slider-nav">
     <div class="cards-notification" id="cards-notification">
     </div>

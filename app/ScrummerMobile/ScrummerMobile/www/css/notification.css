@@ -11,3 +11,36 @@
 .notification.show {
     height: 30px;
 }
+
+#notify-area {
+    background-color:rgba(255, 255, 255, .9);
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    transition: top .2s ease-in-out, height .5s ease-in-out;
+    top: 137px;
+    height: 0px;
+    overflow: hidden;
+    border-bottom: 1px solid #dddddd;
+}
+
+#notify-bottom-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    background-color: #666666;
+    color: #dddddd;
+    line-height: 20px;
+    font-size: small;
+    text-align: center;
+}
+
+#notification-wrapper {
+
+}
+
+.notification {
+    border: 1px solid #dddddd;
+    margin: 5px;
+}
