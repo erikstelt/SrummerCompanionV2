@@ -19,6 +19,7 @@
             if (Date.now() < expires) {
                 window.location.replace('index.html');
             } else {
+                API.refresh();
             }
         }
     
