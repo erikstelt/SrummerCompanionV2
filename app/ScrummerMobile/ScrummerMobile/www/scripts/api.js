@@ -13,18 +13,17 @@
          *
          * @type {string}
          */
-        clientId: 'app',
+        userId: null,
         /**
          * API endpoints
          *
          * @type {Object<string, string>}
          */
         urls: {
-            base: 'http://scrummer.space/api/',
-            login: 'oauth2/authorize/',
-            logout: 'oauth2/revoke_token/',
-            callback: 'oauth2/callback/',
-            profile: 'account/me/',
+            base: 'http://api.dev.scrummer.space/',
+            login: 'auth/login/',
+            refresh: 'auth/refresh',
+            profile: 'accounts/{id}/',
             account: 'account/{email}/',
             badges: 'account/{email}/badges/',
             projects: 'account/{email}/projects/',
@@ -38,55 +37,69 @@
             }
         },
         /**
-         * Open a login window of the api
+         * Login to the API with given credentials
          *
-         * @returns {Promise}
          */
-        login: function () {
-            return new Promise(function (resolve, reject) {
-                var options = 'hardwareback=no,navigation=no,clearcache=yes',
-                    loginUrl = this.buildURL(this.urls.login),
-                    callbackUrl = this.buildURL(this.urls.callback),
-                    state = window.crypto.getRandomValues(new Uint8Array(10)).join(''), // random string to prevent tampering
-                    query = this.buildQueryString({
-                        client_id: this.clientId,
-                        response_type: 'token',
-                        state: state
-                    }),
-                    login = cordova.InAppBrowser.open(loginUrl + query, '_blank', options);
+        login: function (email, password) {
+            var url = this.buildURL(this.urls.login);
+            var data = JSON.stringify({ "email": email, "password": password });
+            var dateNow = new Date();
 
-                login.addEventListener('loadstart', function (event) {
-                    var url = event.url;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
 
-                    // This is the callback url
-                    if (url.indexOf(callbackUrl) === 0) {
-                        var hash = url.indexOf('#') !== -1, // The 'querystring' can be in the hash or in the actual querystring
-                            query = url.split(hash ? '#' : '?')[1],
-                            data = API.parseQueryString(query);
+            xhr.onreadystatechange = function () {
+                var data = JSON.parse(xhr.responseText);
+                // Succes
+                if (xhr.readyState == 4 && xhr.status == 201) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('token_expires', dateNow.setMinutes(dateNow.getMinutes() + 10));
+                    localStorage.setItem('user_id', data.id);
+                    // Redirect to index if login is succesfull
+                    window.location.replace('index.html');
+                }
+                // Failed status
+                else if (xhr.readyState == 4 && xhr.status == 400) {
+                    document.getElementById('errors').innerHTML = data[Object.keys(data)[0]];
+                }
+                // Server error
+                else if (xhr.readyState != 4 && xhr.status != 201) {
+                    document.getElementById('errors').innerHTML = 'Server error';
+                }
+            }
+            xhr.send(data);
+        },
+        /**
+         * Refresh the users session (add new token)
+         *
+         * THIS FUNCTION NEEDS TO BE ADDED TO EVERY API REQUEST FUNCTION
+         */
+        refresh: function () {
+            if (Date.now() > localStorage.getItem('token_expires')) {
+                window.location.replace('index.html');
+                var url = this.buildURL(this.urls.refresh);
+                var data = JSON.stringify({ "token": localStorage.getItem('token') });
+                var dateNow = new Date();
 
-                        // Something went wrong. Usually the user declined
-                        if (data.error) {
-                            reject(data.error);
-                        }
-                        // Check for CSRF attempts
-                        else if (data.state !== state) {
-                            reject("Something went wrong");
-                        }
-                        // Success
-                        else {
-                            resolve(data);
-                        }
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
 
-                        login.close();
+                xhr.onreadystatechange = function () {
+                    var data = JSON.parse(xhr.responseText);
+                    // Succes
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('token_expires', dateNow.setMinutes(dateNow.getMinutes() + 10));
                     }
-                }, false);
-
-                login.addEventListener('loaderror', function (event) {
-                    reject("There was a network error");
-
-                    login.close();
-                }, false);
-            }.bind(this));
+                    else {
+                        // Token invalid, redirect to login.html
+                        window.location.replace('login.html');
+                    }
+                }
+                xhr.send(data);
+            }
         },
         /**
          * End the user session
@@ -94,17 +107,20 @@
          * @returns {Promise}
          */
         logout: function () {
-            var url = this.buildURL(this.urls.logout);
-
-            return this.get(url);
+            localStorage.clear();
+            window.location.replace('login.html');
         },
         /**
          * Get the user profile
          *
          * @returns {Promise}
          */
-        getProfile: function () {
-            return this.get(this.buildURL(this.urls.profile));
+        getProfile: function (id) {
+            var url = this.buildURL(this.urls.profile, {
+                id: id
+            });
+
+            return this.get(url);
         },
         /**
          * Get the perks info

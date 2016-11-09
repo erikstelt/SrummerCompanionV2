@@ -1,7 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: 'unsafe-inline'; connect-src http://scrummer.space;">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: 'unsafe-inline'; connect-src http://api.dev.scrummer.space/auth/login/;">-->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: 'unsafe-inline' http://api.dev.scrummer.space/">
 
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
@@ -26,12 +27,12 @@
             <br />
             <img src="img/scrummer.svg" />
         </h1>
-
+        <div id="errors"></div>
         <form>
             <!--<label for="username">Username:</label><br>-->
-            <input type="text" name="username" class="username" placeholder="email"/><br />
+            <input type="text" name="username" class="username" id="username" placeholder="email"/><br />
             <!--<label for="password">Password:</label><br>-->
-            <input type="password" name="password" class="password" placeholder="password" /><br />
+            <input type="password" name="password" class="password" id="password" placeholder="password" /><br />
         </form>
 
         <button type="button" class="login-button">
@@ -42,7 +43,7 @@
         no account? register
         <br />
         reset password
-        <div class="lower-inner-body">
+        <!--<div class="lower-inner-body">
             <div class="alt-login">
                 or login with
             </div>
@@ -51,7 +52,7 @@
                 <img src="img/facebook.png" alt="Facebook" style="width:48px; height:48px;">
                 <img src="img/git.png" alt="Git" style="width:48px; height:48px;">
             </div>
-        </div>
+        </div>-->
     </div>
 
 

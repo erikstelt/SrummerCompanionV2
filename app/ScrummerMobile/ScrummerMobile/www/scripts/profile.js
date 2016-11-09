@@ -57,13 +57,7 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         delegate(document.querySelector('.profile'), '.logout', function () {
-            profile.then(function (profile) {
-                API.logout(profile.email);
-
-                localStorage.clear();
-
-                window.location.replace('login.html');
-            });
+            API.logout();
         });
     })
 })();

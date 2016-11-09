@@ -15,6 +15,7 @@
         // Update the button state after a swipe
         slider.on('cellSelect', function (e) {
             mainNav.querySelector('[data-slide-index="' + slider.selectedIndex + '"]').checked = true;
+            API.logout();
         });
 
         // Bind the main menu buttons to
@@ -37,9 +38,6 @@
 
         document.querySelector('.logout').addEventListener('click', function () {
             API.logout();
-
-            localStorage.removeItem('token');
-            localStorage.removeItem('token_expires');
         });
     });
 })();
