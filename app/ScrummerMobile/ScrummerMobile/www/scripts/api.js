@@ -21,20 +21,18 @@
          */
         urls: {
             base: 'http://scrummer.space/api/',
-            login: 'oauth2/authorize/',
-            logout: 'oauth2/revoke_token/',
             callback: 'oauth2/callback/',
-            profile: 'account/me/',
-            account: 'account/{email}/',
-            badges: 'account/{email}/badges/',
-            projects: 'account/{email}/projects/',
+            profile: 'accounts/{id}/',
+            avatar: 'accounts/{id}/avatars/'
+            badges: 'accounts/{id}/badges/',
+            projects: 'accounts/{id}/projects/',
             cards: {
-                list: 'account/{email}/cards/',
-                verify: 'cards/{cardId}/verify/'
+                list: 'accounts/{id}/cards/',           // Moet nog een endpoint voor komen
+                verify: 'cards/{cardId}/verify/'        // Hiervoor ook
             },
             perks: {
-                list: 'account/{email}/perks/',
-                buy: 'perks/{perk}/buy/'
+                list: 'accounts/{id}/perks/',
+                buy: 'perks/{perk}/buy/'                // En hiervoor
             }
         },
         /**
