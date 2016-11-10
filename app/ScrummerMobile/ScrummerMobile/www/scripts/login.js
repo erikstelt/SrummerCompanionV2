@@ -11,15 +11,15 @@
 
     document.addEventListener('deviceready', function() {
         var token = localStorage.getItem('token'),
-            expires = localStorage.getItem('token_expires'),
-            userId = localStorage.getItem('user_id');
+            expires = localStorage.getItem('token_expires');
 
         if (token && expires) {
             // check age of token
             if (Date.now() < expires) {
                 window.location.replace('index.html');
             } else {
-                API.refresh();
+                var redirect = API.refresh();
+                if (redirect) { window.location.replace('index.html'); };
             }
         }
     

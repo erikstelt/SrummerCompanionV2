@@ -1,7 +1,13 @@
 ﻿(function () {
     'use strict';
 
-    var profile = API.getProfile();
+    var profile = API.getProfile(API.userId);
+    console.log(profile);
+    profile.then(function (data) {
+        console.log('works');
+    }).catch(function () {
+        console.log('error');
+    });
 
     /**
      * @returns {Promise}
@@ -9,9 +15,9 @@
     Template.data.profile = function () {
         return profile.then(function (data) {
             // Calculate skill percentages
-            var mastery = Math.round(data.mastery / 5000 * 100),
-                teamwork = Math.round(data.teamwork / 10 * 100),
-                responsibility = data.responsibility; // Max is 100
+            var mastery = Math.round(data.userprofile.mastery / 5000 * 100),
+                teamwork = Math.round(data.userprofile.teamwork / 10 * 100),
+                responsibility = data.userprofile.responsibility; // Max is 100
 
             mastery = mastery === 100 ? 'max' : mastery + '%';
             teamwork = teamwork === 100 ? 'max' : teamwork + '%';
@@ -30,22 +36,22 @@
                 // Skills
                 mastery: {
                     percent: mastery,
-                    exp: data.mastery
+                    exp: data.userprofile.mastery
                 },
                 teamwork: {
                     percent: teamwork,
-                    exp: data.teamwork
+                    exp: data.userprofile.teamwork
                 },
                 responsibility: {
                     percent: responsibility,
-                    exp: data.responsibility
+                    exp: data.userprofile.responsibility
                 },
                 // Powers
-                power1: data.power1,
-                power2: data.power2,
-                power3: data.power3,
-                power4: data.power4,
-                power5: data.power5,
+                power1: data.userprofile.power1,
+                power2: data.userprofile.power2,
+                power3: data.userprofile.power3,
+                power4: data.userprofile.power4,
+                power5: data.userprofile.power5,
                 // Contact
                 email: data.email,
                 phone: data.phone

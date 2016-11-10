@@ -2,18 +2,13 @@
     'use strict';
 
     var API = {
+        userId: localStorage.getItem('user_id'),
         /**
          * The token to authenticate with
          *
          * @type {string}
          */
         token: null,
-        /**
-         * The app id within the api
-         *
-         * @type {string}
-         */
-        userId: null,
         /**
          * API endpoints
          *
@@ -24,27 +19,32 @@
             login: 'auth/login/',
             refresh: 'auth/refresh',
             profile: 'accounts/{id}/',
-            account: 'account/{email}/',
-            badges: 'account/{email}/badges/',
-            projects: 'account/{email}/projects/',
+            avatar: 'accounts/{id}/avatars/',
+            badgeTitles: '/perks/',
+            badgeDetails: 'accounts/{id}/badges/',
+            projects: 'accounts/{id}/projects/',
             cards: {
-                list: 'account/{email}/cards/',
-                verify: 'cards/{cardId}/verify/'
+                list: 'accounts/{id}/cards/',           // Moet nog een endpoint voor komen
+                verify: 'cards/{cardId}/verify/'        // Hiervoor ook
             },
             perks: {
-                list: 'account/{email}/perks/',
-                buy: 'perks/{perk}/buy/'
+                list: 'accounts/{id}/perks/',
+                buy: 'perks/{perk}/buy/'                // En hiervoor
             }
         },
         /**
          * Login to the API with given credentials
          *
+         * If succesfull, redirects to index.html
          */
         login: function (email, password) {
+            // Build URL and enclose the email and password in the POST request
             var url = this.buildURL(this.urls.login);
             var data = JSON.stringify({ "email": email, "password": password });
+            // Set date for token expiry date
             var dateNow = new Date();
 
+            // Create new POST request which will process the authentication of the user
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
@@ -76,12 +76,13 @@
          * THIS FUNCTION NEEDS TO BE ADDED TO EVERY API REQUEST FUNCTION
          */
         refresh: function () {
+            // Only run if token is expired
             if (Date.now() > localStorage.getItem('token_expires')) {
-                window.location.replace('index.html');
                 var url = this.buildURL(this.urls.refresh);
                 var data = JSON.stringify({ "token": localStorage.getItem('token') });
                 var dateNow = new Date();
 
+                // Create new POST request which will add a new token to the local storage
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", url, true);
                 xhr.setRequestHeader('Content-Type', 'application/json');
@@ -92,10 +93,11 @@
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('token_expires', dateNow.setMinutes(dateNow.getMinutes() + 10));
+                        return true;
                     }
                     else {
                         // Token invalid, redirect to login.html
-                        window.location.replace('login.html');
+                        this.logout();
                     }
                 }
                 xhr.send(data);
@@ -116,6 +118,7 @@
          * @returns {Promise}
          */
         getProfile: function (id) {
+            this.refresh();
             var url = this.buildURL(this.urls.profile, {
                 id: id
             });
@@ -220,7 +223,7 @@
             var request = {
                 method: method,
                 headers: {
-                    'Authorization': 'Bearer ' + this.token
+                    'Authorization': 'Token ' + this.token
                 }
             };
 
