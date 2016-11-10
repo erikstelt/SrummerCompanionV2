@@ -2,12 +2,6 @@
     'use strict';
 
     var profile = API.getProfile(API.userId);
-    console.log(profile);
-    profile.then(function (data) {
-        console.log('works');
-    }).catch(function () {
-        console.log('error');
-    });
 
     /**
      * @returns {Promise}
