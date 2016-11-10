@@ -24,11 +24,11 @@
             responsibility = responsibility === 100 ? 'max' : responsibility + '%';
 
             // We set the current exp in this level and the maximum
-            var level = Math.floor(Math.pow(data.exp / 2, 1 / 3)),
+            var level = Math.floor(Math.pow(data.userprofile.exp / 2, 1 / 3)),
                 curMaxExp = Math.pow(level + 1, 3) * 2,
                 prevMaxExp = Math.pow(level, 3) * 2,
                 maxExp = curMaxExp - prevMaxExp,
-                currExp = data.exp - prevMaxExp;
+                currExp = data.userprofile.exp - prevMaxExp;
 
             return {
                 exp: currExp,
