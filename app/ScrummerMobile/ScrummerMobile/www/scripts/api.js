@@ -126,14 +126,27 @@
             return this.get(url);
         },
         /**
-         * Get the perks info
-         *
-         * @param {string} email
-         * @returns {Promise}
-         */
-        getBadges: function (email) {
-            var url = this.buildURL(this.urls.badges, {
-                email: email
+        * Get the badge titles
+        *
+        * @returns {Promise}
+        */
+        getBadgeTitles () {
+            this.refresh();
+
+            var url = this.buildURL(this.urls.badgeTitles);
+
+            return this.get(url);
+        },
+        /**
+        * Get the badge details
+        *
+        * @param {string} id
+        * @returns {Promise}
+        */
+        getBadgeDetails (id) {
+            this.refresh();
+            var url = this.buildURL(this.urls.badgeDetails, {
+                id: id
             });
 
             return this.get(url);

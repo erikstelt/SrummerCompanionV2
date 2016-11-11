@@ -3,6 +3,13 @@
     var powerNames = ['research', 'design', 'interaction', 'production', 'documentation', 'achievement'],
     data, intervalId;
 
+    return Promise.all([API.getBadgeTitles(), API.getBadgeDetails(API.userId)]).then(function (data) {
+        for (var test in data) {
+            console.log(test);
+            console.log(data[test]);
+        }
+    });
+
     Template.data.trophies = function () {
         // Get profile
         return API.getProfile().then(function (profile) {
