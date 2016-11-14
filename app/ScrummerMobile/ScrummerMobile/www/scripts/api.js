@@ -126,18 +126,6 @@
             return this.get(url);
         },
         /**
-        * Get the badge titles
-        *
-        * @returns {Promise}
-        */
-        getBadgeTitles () {
-            this.refresh();
-
-            var url = this.buildURL(this.urls.badgeTitles);
-
-            return this.get(url);
-        },
-        /**
         * Get the badge details
         *
         * @param {string} id
@@ -157,9 +145,9 @@
          * @param {string} email
          * @returns {Promise}
          */
-        getPerks: function (email) {
+        getPerks: function (id) {
             var url = this.buildURL(this.urls.perks.list, {
-                email: email
+                id: id
             });
 
             return this.get(url);
