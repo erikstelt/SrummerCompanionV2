@@ -101,7 +101,45 @@
 
     <!-- The trophies section of the page -->
     <section class="trophies">
-        
+        <section id="modal-template" class="modal rendered" data-template="modal">
+            <div class="{{power}}">
+                <h1>{{name}}</h1>
+
+                <section>
+                    <p class="info">
+                        {{desc}}
+                    </p>
+                    <p class="cost">
+                        {{cost}}
+                    </p>
+                    {{#has_teams}}
+                    <select>
+                        <option>Selecteer team&hellip;</option>
+                        {{#teams}}
+                        <option value="{{id}}">{{name}}</option>
+                        {{/teams}}
+                    </select>
+                    {{/has_teams}}
+                </section>
+
+                <footer>
+                    <button type="button" class="cancel">
+                        Cancel
+                    </button>
+
+                    {{#can_buy}}
+                    <button type="button" class="buy" data-perk-id="{{id}}">
+                        Buy
+                    </button>
+                    {{/can_buy}}
+                    {{^can_buy}}
+                    <span class="unavailable">
+                        Not available
+                    </span>
+                    {{/can_buy}}
+                </footer>
+            </div>
+        </section>
 
         <section id="trophies-template" class="list" data-template="trophies">
             <h2>Achievements</h2>

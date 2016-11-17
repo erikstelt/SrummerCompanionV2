@@ -3,16 +3,12 @@
     var powerNames = ['research', 'design', 'interaction', 'production', 'documentation', 'achievement'],
     data, intervalId;
 
-    var counter = 1;
-
     Template.data.trophies = function () {
         // Get profile
         return API.getProfile(API.userId).then(function (profile) {
             // Get badges and perks. Also pass on profile
             return Promise.all([API.getBadges(API.userId), API.getPerks(API.userId), profile]);
         }).then(function (values) {
-            console.log('test');
-
             var badges = values[0],
                 perks = values[1],
                 profile = values[2];
@@ -27,24 +23,10 @@
                 //    perk.cooldown.text = false;
                 //}
 
-                return Object.assign(perk, badges[counter], {
+                return Object.assign(perk, badges[perk.id], {
                     perkName: perk.name // Original name is overwritten by badge.name
                 });
             });
-
-            console.log(counter);
-            console.log(badges);
-            console.log(badges[counter]);
-
-            //for (var perk in perks) {
-            //    var obj = perks[perk];
-            //    for (var test in obj) {
-            //        console.log(test);
-            //        console.log(obj[test]);
-            //    }
-            //}
-
-            counter++;
 
             // Save data for later
             data = Promise.resolve([_.keyBy(perks, 'id'), profile]);
@@ -82,7 +64,7 @@
 
         // Get the profile and the perks
         var teams = data.then(function (values) {
-            return API.getTeams(values[1].email);
+            return API.getTeams(API.userId);
         }).then(function (teams) {
             return teams.map(function (team) {
                 return _.pick(team, ['id', 'name']);
