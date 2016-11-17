@@ -131,7 +131,7 @@
         * @param {string} id
         * @returns {Promise}
         */
-        getBadgeDetails (id) {
+        getBadges: function (id) {
             this.refresh();
             var url = this.buildURL(this.urls.badgeDetails, {
                 id: id
@@ -171,9 +171,9 @@
 
             return this.get(url, 'PUT');
         },
-        getTeams: function (email) {
+        getTeams: function (id) {
             var url = this.buildURL(this.urls.projects, {
-                email: email
+                id: id
             });
 
             return this.get(url);
