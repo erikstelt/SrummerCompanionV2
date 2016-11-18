@@ -16,18 +16,16 @@
         } else { document.getElementById("cards-notification").style.display = 'none'; }
     }
 
+    console.log('test');
+
     Template.data.cards = function () {
         // Reset counter on reloading template
         notificationCardCounter = 0;
         // Get profile
-        return API.getProfile()
-            .then(function (profile) {
-                return profile.email;
-            })
-            .then(function (email) {
-                return API.getCards(email, 'verify');
-            })
+        return API.getCards(API.userId, 'verify')
             .then(function (cards) {
+                console.log('test');
+                console.log(cards);
                 cards = cards.map(function (card) {
                     card.icon = powerIcons[card.power - 1];
                     card.power = powerNames[card.power - 1];
