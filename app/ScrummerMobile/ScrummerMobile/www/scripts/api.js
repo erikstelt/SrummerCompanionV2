@@ -24,8 +24,8 @@
             badgeDetails: 'accounts/{id}/badges/',
             projects: 'accounts/{id}/projects/',
             cards: {
-                list: 'accounts/{id}/cards/',           // Moet nog een endpoint voor komen
-                verify: 'cards/{cardId}/verify/'        // Hiervoor ook
+                list: 'accounts/{id}/cards/',        
+                verify: 'cards/{cardId}/verify/'        // Moet nog een endpoint voor komen
             },
             perks: {
                 list: 'accounts/{id}/perks/',
@@ -118,7 +118,6 @@
          * @returns {Promise}
          */
         getProfile: function (id) {
-            this.refresh();
             var url = this.buildURL(this.urls.profile, {
                 id: id
             });
@@ -132,7 +131,6 @@
         * @returns {Promise}
         */
         getBadges: function (id) {
-            this.refresh();
             var url = this.buildURL(this.urls.badgeDetails, {
                 id: id
             });
@@ -185,9 +183,9 @@
          * @param {string} [type] Defaults to verify
          * @returns {Promise}
          */
-        getCards: function (email, type) {
+        getCards: function (id, type) {
             var url = this.buildURL(this.urls.cards.list, {
-                    email: email
+                    id: id
                 }),
                 data = {
                     type: type || 'verify'
@@ -218,6 +216,8 @@
          * @returns {Promise}
          */
         get: function (url, method, data) {
+            // Always use refresh function before get / post / put data
+            this.refresh();
 
             method = method && method.toUpperCase() || 'GET';
 
